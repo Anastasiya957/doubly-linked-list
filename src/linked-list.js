@@ -3,10 +3,8 @@ const Node = require('./node');
 class LinkedList {
     constructor() {
         this.length = 0;
-        this._head;
-        this._tail;
-        this.head;
-        this.tail;
+        this._head = null;
+        this._tail = null;
     }
 
     append(data) {
@@ -23,11 +21,19 @@ class LinkedList {
     }
 
     head() {
-        return this._head.data;
+        if (this._head === null) {
+            return null;
+        } else {
+            return this._head.data;
+        }
     }
 
     tail() {
-        return this._tail.data; 
+        if (this._tail === null) {
+            return null;
+        } else {
+            return this._tail.data;
+        } 
     }
 
     at(index) {
@@ -60,7 +66,11 @@ class LinkedList {
         }
     }
 
-    clear() {}
+    clear() {
+        this._head = null;
+        this._tail = null;
+        this.length = 0;
+    }
 
     deleteAt(index) {}
 
