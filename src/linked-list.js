@@ -47,10 +47,9 @@ class LinkedList {
     insertAt(index, data) {
         var newNode = new Node(data);
         var currentNode = this._head;
-        for (var i = 1; i < index; i++) {
+        for (var i = 0; i < index - 1; i++) {
             currentNode = currentNode.next;
         }
-
         newNode.next = currentNode.next;
         newNode.prev = currentNode;
         currentNode.next = newNode;
@@ -72,11 +71,47 @@ class LinkedList {
         this.length = 0;
     }
 
-    deleteAt(index) {}
+    deleteAt(index) {
+        var prevNode = this._head;
+        for (var i = 0; i < index - 1; i++) {
+            prevNode = prevNode.next;
+        }
+        var currentNode = prevNode.next;
+        var nextNode = currentNode.next;
+        
+        currentNode.prev = null;
+        currentNode.next = null;
+        currentNode.data = 0;
 
-    reverse() {}
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+        this.length -= 1;
+    }
 
-    indexOf(data) {}
+    reverse() {
+        var currentNode = this._head;
+        for (var i = 0; i < this.length ; i++) {
+            var temp = currentNode.next;
+            currentNode.next = currentNode.prev;
+            currentNode.prev = temp;
+            currentNode = temp;
+        }
+
+        var temp = this._head;
+        this._head = this._tail;
+        this._tail = temp;
+    }
+
+    indexOf(data) {
+        var currentNode = this._head;
+        for (var i = 0; i < this.length ; i++) {
+            if (currentNode.data == data) {
+                return i;
+            }
+            currentNode = currentNode.next;
+        }
+        return -1;
+    }
 }
 
 module.exports = LinkedList;
